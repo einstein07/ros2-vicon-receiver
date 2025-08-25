@@ -19,6 +19,9 @@ void Publisher::publish(PositionStruct p)
     msg->y_rot = p.rotation[1];
     msg->z_rot = p.rotation[2];
     msg->w = p.rotation[3];
+    msg->x_rot_euler = p.rotation_euler[0];
+    msg->y_rot_euler = p.rotation_euler[1];
+    msg->z_rot_euler = p.rotation_euler[2];
     msg->subject_name = p.subject_name;
     msg->segment_name = p.segment_name;
     msg->frame_number = p.frame_number;
@@ -39,6 +42,9 @@ void Publisher::publish(std::vector <PositionStruct> p)
         msg->y_rot = p[i].rotation[1];
         msg->z_rot = p[i].rotation[2];
         msg->w = p[i].rotation[3];
+        msg->x_rot_euler = p[i].rotation_euler[0];
+        msg->y_rot_euler = p[i].rotation_euler[1];
+        msg->z_rot_euler = p[i].rotation_euler[2];
         msg->subject_name = p[i].subject_name;
         msg->segment_name = p[i].segment_name;
         msg->frame_number = p[i].frame_number;

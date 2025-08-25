@@ -100,15 +100,26 @@ void Communicator::get_frame()
             PositionStruct current_position;
             Output_GetSegmentGlobalTranslation trans =
                 vicon_client.GetSegmentGlobalTranslation(subject_name, segment_name);
-            Output_GetSegmentGlobalRotationQuaternion rot =
+
+            //  For angle in Quaterion
+            Output_GetSegmentGlobalRotationQuaternion quat_rot =
                 vicon_client.GetSegmentGlobalRotationQuaternion(subject_name, segment_name);
+
+            // For angle in Euler
+            Output_GetSegmentGlobalRotationEulerXYZ euler_rot =
+                vicon_client.GetSegmentGlobalRotationEulerXYZ(subject_name, segment_name);
             
+            // Rotation and Translation
             for (size_t i = 0; i < 4; i++)
             {
                 if (i < 3)
+                {
                     current_position.translation[i] = trans.Translation[i];
-                current_position.rotation[i] = rot.Rotation[i];
+                    current_position.rotation_euler[i] = euler_rot.Rotation[i];
+                }
+                current_position.rotation[i] = quat_rot.Rotation[i];
             }
+
             current_position.segment_name = segment_name;
             current_position.subject_name = subject_name;
             current_position.translation_type = "Global";

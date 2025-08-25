@@ -10,6 +10,7 @@ struct PositionStruct
 {
     double translation[3];
     double rotation[4];
+    double rotation_euler[3];
     std::string subject_name;
     std::string segment_name;
     std::string translation_type;
